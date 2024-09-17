@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd_Team8"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Opgave-vindue" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="150" />
+            <ColumnDefinition
+                Width="1*" />
+        </Grid.ColumnDefinitions>
 
+        <ListBox Grid.Column="1" Margin="10">
+            
+        </ListBox>
+
+        <StackPanel Margin="10">
+            <Button
+                Content="Tilføj opgave"
+                Margin="0,0,0,10"
+                Height="40"/>
+            <Button
+                Content="Redigér opgave"
+                Margin="0,0,0,10"
+                Height="40" />
+            <Button
+                Content="Slet opgave"
+                Margin="0,0,0,10"
+                Height="40" />
+            <Button
+                Content="Kombinér opgaver"
+                Margin="0,0,0,10"
+                Height="40"/>
+            <Button
+                Content="Fuldfør opgave"
+                Margin="0,0,0,10"
+                Height="40"/>
+            <Label 
+                Content="Søgning:"/>
+            <TextBox
+                Margin="0,0,0,10"/>
+            <Button 
+                Content="Søg"
+                Height="40"/>
+        </StackPanel>
     </Grid>
 </Window>
