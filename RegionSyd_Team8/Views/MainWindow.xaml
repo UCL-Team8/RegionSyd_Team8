@@ -19,6 +19,14 @@
         </ListBox>
 
         <StackPanel Margin="10">
+            <Label
+                Content="Søgning:" />
+            <TextBox
+                Margin="0,0,0,10" />
+            <Button
+                Content="Søg"
+                Height="40"
+                Margin="0,0,0,10" />
             <Button
                 Content="Tilføj opgave"
                 Margin="0,0,0,10"
@@ -28,23 +36,16 @@
                 Margin="0,0,0,10"
                 Height="40" />
             <Button
-                Content="Slet opgave"
-                Margin="0,0,0,10"
-                Height="40" />
-            <Button
                 Content="Kombinér opgaver"
                 Margin="0,0,0,10"
                 Height="40"/>
             <Button
+                Content="Slet opgave"
+                Margin="0,0,0,10"
+                Height="40" />
+            <Button
                 Content="Fuldfør opgave"
                 Margin="0,0,0,10"
-                Height="40"/>
-            <Label 
-                Content="Søgning:"/>
-            <TextBox
-                Margin="0,0,0,10"/>
-            <Button 
-                Content="Søg"
                 Height="40"/>
         </StackPanel>
     </Grid>
