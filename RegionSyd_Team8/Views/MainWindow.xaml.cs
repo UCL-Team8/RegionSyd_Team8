@@ -8,6 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RegionSyd_Team8.Models;
+using RegionSyd_Team8.ViewModels;
+using RegionSyd_Team8.Views;
 
 namespace RegionSyd_Team8
 {
@@ -19,6 +22,21 @@ namespace RegionSyd_Team8
         public MainWindow()
         {
             InitializeComponent();
+            AssignmentViewModel vm = new AssignmentViewModel();
+            DataContext = vm;
+        }
+
+        private void AssignmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {          
+            var viewModel = DataContext as AssignmentViewModel;
+            if (viewModel != null)
+            {
+                viewModel.SelectedAssignments.Clear();              
+                foreach (var assignment in assignmentBox.SelectedItems)
+                {
+                    viewModel.SelectedAssignments.Add(assignment as Assignment);
+                }
+            }
         }
     }
 }

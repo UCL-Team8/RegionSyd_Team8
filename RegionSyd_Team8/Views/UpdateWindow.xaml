@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd_Team8.Views"
         mc:Ignorable="d"
-        Title="UpdateWindow" Height="450" Width="800">
+        Title="Redigerings-vindue" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="150" />
+            <ColumnDefinition
+                Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Margin="10">
+            <Button Content="Afslut" Height="40"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <Label Content="OpgaveID:"/>
+            <TextBox Margin="0,0,0,5"/>
+            <Label
+                Content="Opgavebeskrivelse:" />
+            <TextBox
+                Margin="0,0,0,5" />
+            <Label
+                Content="Afhentningstid:" />
+            <TextBox
+                Margin="0,0,0,5" />
+            <Label
+                Content="Afsætningstid:" />
+            <TextBox
+                Margin="0,0,0,5" />
+            <Label
+                Content="Fra adresse:" />
+            <TextBox
+                Margin="0,0,0,5" />
+            <Label
+                Content="Til adresse:" />
+            <TextBox
+                Margin="0,0,0,5" />
+        </StackPanel>
     </Grid>
 </Window>
