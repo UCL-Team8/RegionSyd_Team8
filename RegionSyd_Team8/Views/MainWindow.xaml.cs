@@ -26,6 +26,7 @@ namespace RegionSyd_Team8
             DataContext = vm;
         }
 
+        //Event der trigges hver gang der vælges opgaver i ListBoxen
         private void AssignmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {          
             var viewModel = DataContext as AssignmentViewModel;

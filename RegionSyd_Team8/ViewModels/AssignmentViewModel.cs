@@ -15,16 +15,19 @@ namespace RegionSyd_Team8.ViewModels
 {
     public class AssignmentViewModel : ViewModelBase
     {
+        //Observable Collections
         public ObservableCollection<Assignment> Assignments { get; set; }
-
+        //SelectedAssignments holder styr på, hvor mange opgaver, som er valgt i ListBoxen
         public ObservableCollection<Assignment> SelectedAssignments { get; set; }
 
+        //RelayCommands
         public RelayCommand UpdateCommand => new RelayCommand(execute => OpenUpdateWindow(), canExecute => CanOpenUpdateWindow());
+        public RelayCommand CombineCommand => new RelayCommand(execute => OpenCombinationWindow(), canExecute => CanOpenCombinationWindow());
 
+        //Constructor
         public AssignmentViewModel() 
         { 
-            //Assignments used for testing purposes
-            
+            //Opgaverne her er kun til test            
             Assignments = new ObservableCollection<Assignment>();
             SelectedAssignments = new ObservableCollection<Assignment>();
 
@@ -46,19 +49,46 @@ namespace RegionSyd_Team8.ViewModels
                 FromAddress = "Hospitalsvej 2",
                 ToAddress = "Husvej 3"
             });
+            Assignments.Add(new Assignment
+            {
+                AssignmentID = 3,
+                Description = "Hent patient 2 fra hospitalet",
+                PickUpTime = DateTime.Now,
+                DropOffTime = DateTime.Now,
+                FromAddress = "Hospitalsvej 24",
+                ToAddress = "Husvej 9"
+            });
         }
         
         public Assignment SelectedAssignment { get; set; }
 
+        //Metoder til RelayCommands
         private void OpenUpdateWindow()
         {
-            var updateWindow = new UpdateWindow();
-            updateWindow.Show();
+            UpdateViewModel updateViewModel = new UpdateViewModel(SelectedAssignment);
+            UpdateWindow updateWindow = new UpdateWindow
+            {
+                DataContext = updateViewModel
+            };
+            
+            //ShowDialog gør, at det underliggende vindue ikke kan tilgås, før man har lukket det nye vindue
+            updateWindow.ShowDialog();
         }
 
         private bool CanOpenUpdateWindow()
         {
             return SelectedAssignments.Count == 1;
+        }
+
+        private void OpenCombinationWindow()
+        {
+            CombinationWindow combinationWindow = new CombinationWindow();
+            combinationWindow.ShowDialog();
+        }
+
+        private bool CanOpenCombinationWindow()
+        {
+            return SelectedAssignments.Count == 2;
         }
     }
 }

@@ -15,32 +15,43 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Margin="10">
-            <Button Content="Afslut" Height="40"/>
+            <Button
+                Content="Afslut"
+                Height="40"
+                Command="{Binding CloseUpdateWindow}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10">
             <Label Content="OpgaveID:"/>
-            <TextBox Margin="0,0,0,5"/>
+            <TextBox
+                Margin="0,0,0,5"
+                Text="{Binding CurrentAssignment.AssignmentID}"/>
             <Label
                 Content="Opgavebeskrivelse:" />
             <TextBox
-                Margin="0,0,0,5" />
+                Margin="0,0,0,5"
+                Text="{Binding CurrentAssignment.Description}" />
             <Label
                 Content="Afhentningstid:" />
             <TextBox
-                Margin="0,0,0,5" />
+                Margin="0,0,0,5"
+                Text="{Binding CurrentAssignment.PickUpTime}" />
             <Label
                 Content="Afsætningstid:" />
             <TextBox
-                Margin="0,0,0,5" />
+                Margin="0,0,0,5"
+                Text="{Binding CurrentAssignment.DropOffTime}" />
             <Label
                 Content="Fra adresse:" />
             <TextBox
-                Margin="0,0,0,5" />
+                Margin="0,0,0,5"
+                Text="{Binding CurrentAssignment.FromAddress}" />
             <Label
                 Content="Til adresse:" />
             <TextBox
-                Margin="0,0,0,5" />
+                Margin="0,0,0,5"
+                Text="{Binding CurrentAssignment.ToAddress}" />
         </StackPanel>
     </Grid>
 </Window>
