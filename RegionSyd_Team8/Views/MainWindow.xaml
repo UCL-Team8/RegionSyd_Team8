@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd_Team8"
         mc:Ignorable="d"
-        Title="Opgave-vindue" Height="450" Width="800">
+        Title="Opgave-vindue" Height="550" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition
@@ -14,7 +14,7 @@
                 Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <ListBox
+        <!--<ListBox
             x:Name="assignmentBox"
             Grid.Column="1"
             Margin="10"
@@ -31,9 +31,9 @@
                         <TextBlock
                             Text="{Binding Description, StringFormat='Beskrivelse: {0}'}" />
                         <TextBlock
-                            Text="{Binding PickUpTime, StringFormat='Afhentningstid: {0}'}" />
+                            Text="{Binding PickUpTime, StringFormat='Afhentningstid: {0:dd-MM-yyyy HH:mm}'}" />
                         <TextBlock
-                            Text="{Binding DropOffTime, StringFormat='Afsætningstid: {0}'}" />
+                            Text="{Binding DropOffTime, StringFormat='Afsætningstid: {0:dd-MM-yyyy HH:mm}'}" />
                         <TextBlock
                             Text="{Binding FromAddress, StringFormat='Fra: {0}'}" />
                         <TextBlock
@@ -41,15 +41,69 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
 
+        <DataGrid
+            x:Name="assignmentBox"
+            Grid.Column="1"
+            Margin="10"
+            ItemsSource="{Binding Assignments}"
+            SelectedItem="{Binding SelectedAssignment}"
+            SelectionMode="Extended"
+            SelectionChanged="AssignmentBox_SelectionChanged"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            RowBackground="White"
+            AlternatingRowBackground="GhostWhite">
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                    Header="OpgaveID" 
+                    Binding="{Binding AssignmentID}" 
+                    Width="1*"/>
+                <DataGridTextColumn
+                    Header="Beskrivelse"
+                    Binding="{Binding Description}"
+                    Width="3*" />
+                <DataGridTextColumn
+                    Header="Afhentningstid"
+                    Binding="{Binding PickUpTime, StringFormat={}{0:dd-MM-yyyy HH:mm}}"
+                    Width="2*" />
+                <DataGridTextColumn
+                    Header="Afsætningstid"
+                    Binding="{Binding DropOffTime, StringFormat={}{0:dd-MM-yyyy HH:mm}}"
+                    Width="2*" />
+                <DataGridTextColumn
+                    Header="Fra"
+                    Binding="{Binding FromAddress}"
+                    Width="3*" />
+                <DataGridTextColumn
+                    Header="Til"
+                    Binding="{Binding ToAddress}"
+                    Width="3*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
         <StackPanel Margin="10">
+            <Label Content="Filtrering:"/>
+            <DatePicker 
+                Margin="0,0,0,10"
+                SelectedDate="{Binding FilterDate}"/>
+            <Button
+                Content="Filtrér"
+                Height="40"
+                Margin="0,0,0,0" />
             <Label
                 Content="Søgning:" />
             <TextBox
                 Margin="0,0,0,10" />
             <Button
                 Content="Søg"
+                Height="40"
+                Margin="0,0,0,10" />
+            <Button
+                Content="Vis alle opgaver"
                 Height="40"
                 Margin="0,0,0,10" />
             <Button

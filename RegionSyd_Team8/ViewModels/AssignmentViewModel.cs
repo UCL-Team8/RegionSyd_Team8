@@ -17,8 +17,11 @@ namespace RegionSyd_Team8.ViewModels
     {
         //Observable Collections
         public ObservableCollection<Assignment> Assignments { get; set; }
-        //SelectedAssignments holder styr på, hvor mange opgaver, som er valgt i ListBoxen
+        //SelectedAssignments keeps track of how many assignments are selected in the datagrid
         public ObservableCollection<Assignment> SelectedAssignments { get; set; }
+
+        //DateTime for filtering
+        public DateTime FilterDate { get; set; }
 
         //RelayCommands
         public RelayCommand UpdateCommand => new RelayCommand(execute => OpenUpdateWindow(), canExecute => CanOpenUpdateWindow());
@@ -27,42 +30,21 @@ namespace RegionSyd_Team8.ViewModels
         //Constructor
         public AssignmentViewModel() 
         { 
-            //Opgaverne her er kun til test            
+            //The Assignments are only for testing purposes            
             Assignments = new ObservableCollection<Assignment>();
             SelectedAssignments = new ObservableCollection<Assignment>();
 
-            Assignments.Add(new Assignment
+            FilterDate = DateTime.Now;
+
+            for (int i = 0; i < 30; i++)
             {
-                AssignmentID = 1,
-                Description = "Hent patient 0 fra hospitalet",
-                PickUpTime = DateTime.Now,
-                DropOffTime = DateTime.Now,
-                FromAddress = "Hospitalsvej 1",
-                ToAddress = "Husvej 2"
-            });
-            Assignments.Add(new Assignment
-            {
-                AssignmentID = 2,
-                Description = "Hent patient 1 fra hospitalet",
-                PickUpTime = DateTime.Now,
-                DropOffTime = DateTime.Now,
-                FromAddress = "Hospitalsvej 2",
-                ToAddress = "Husvej 3"
-            });
-            Assignments.Add(new Assignment
-            {
-                AssignmentID = 3,
-                Description = "Hent patient 2 fra hospitalet",
-                PickUpTime = DateTime.Now,
-                DropOffTime = DateTime.Now,
-                FromAddress = "Hospitalsvej 24",
-                ToAddress = "Husvej 9"
-            });
+                Assignments.Add(new Assignment("Hent patient 0 fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1"));
+            }            
         }
         
         public Assignment SelectedAssignment { get; set; }
 
-        //Metoder til RelayCommands
+        //Methods for RelayCommands
         private void OpenUpdateWindow()
         {
             UpdateViewModel updateViewModel = new UpdateViewModel(SelectedAssignment);
@@ -70,9 +52,13 @@ namespace RegionSyd_Team8.ViewModels
             {
                 DataContext = updateViewModel
             };
-            
-            //ShowDialog gør, at det underliggende vindue ikke kan tilgås, før man har lukket det nye vindue
+
+            //ShowDialog only allows the user to interact with the current window
             updateWindow.ShowDialog();
+
+            //Adds a new list to Assignments as the list wouldn't update otherwise
+            Assignments = new ObservableCollection<Assignment>(Assignments);
+            OnPropertyChanged(nameof(Assignments));
         }
 
         private bool CanOpenUpdateWindow()
