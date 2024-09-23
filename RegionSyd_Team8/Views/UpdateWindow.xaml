@@ -16,42 +16,74 @@
 
         <StackPanel Margin="10">
             <Button
-                Content="Afslut"
+                Margin="0,0,0,10"
+                Content="Gem"
                 Height="40"
-                Command="{Binding CloseUpdateWindow}"
+                Command="{Binding SaveUpdate}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <Button
+                Content="Annuller"
+                Height="40"
+                Command="{Binding CancelUpdate}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10">
             <Label Content="OpgaveID:"/>
-            <TextBox
-                Margin="0,0,0,5"
-                Text="{Binding CurrentAssignment.AssignmentID}"/>
+            <TextBlock
+                Margin="5,0,0,5"
+                Text="{Binding CurrentAssignment.AssignmentID}" />
             <Label
                 Content="Opgavebeskrivelse:" />
             <TextBox
-                Margin="0,0,0,5"
-                Text="{Binding CurrentAssignment.Description}" />
+                Margin="5,0,0,5"
+                Text="{Binding UpdateDescription}" />
             <Label
                 Content="Afhentningstid:" />
-            <TextBox
-                Margin="0,0,0,5"
-                Text="{Binding CurrentAssignment.PickUpTime}" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0,0,0,5">
+                <Label Content="Dato:"/>
+                <DatePicker
+                    Margin="2,2,10,0"
+                    Width="125"
+                    SelectedDate="{Binding SelectedPickUpTime}" />
+                <Label Content="Tidspunkt:"/>
+                <TextBox Margin="2,2,0,0" Width="125" Height="20" Text="{Binding CurrentPickUpTime}"/>
+            </StackPanel>
+            
             <Label
                 Content="Afsætningstid:" />
-            <TextBox
-                Margin="0,0,0,5"
-                Text="{Binding CurrentAssignment.DropOffTime}" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0,0,0,5">
+                <Label
+                    Content="Dato:" />
+                <DatePicker
+                    Margin="2,2,10,0"
+                    Width="125"
+                    SelectedDate="{Binding SelectedDropOffTime}" />
+                <Label
+                    Content="Tidspunkt:" />
+                <TextBox
+                    Margin="2,2,0,0"
+                    Width="125"
+                    Height="20"
+                    Text="{Binding CurrentDropOffTime}" />
+            </StackPanel>
+
             <Label
                 Content="Fra adresse:" />
             <TextBox
-                Margin="0,0,0,5"
-                Text="{Binding CurrentAssignment.FromAddress}" />
+                Margin="5,0,0,5"
+                Text="{Binding UpdateFromAddress}" />
             <Label
                 Content="Til adresse:" />
             <TextBox
-                Margin="0,0,0,5"
-                Text="{Binding CurrentAssignment.ToAddress}" />
+                Margin="5,0,0,5"
+                Text="{Binding UpdateToAddress}" />
         </StackPanel>
     </Grid>
 </Window>
