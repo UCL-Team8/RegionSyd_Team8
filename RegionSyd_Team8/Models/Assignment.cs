@@ -24,7 +24,11 @@ namespace RegionSyd_Team8.Models
         public static int NextID = 1;
 
         //Test constructor
-        public Assignment(string description, DateTime pickUpTime, DateTime dropOffTime, string fromAddress, string toAddress) 
+
+        public Assignment()
+        {
+        }
+        public Assignment(string description, DateTime pickUpTime, DateTime dropOffTime, string fromAddress, string toAddress)
         {
             AssignmentID = NextID;
             NextID++;
@@ -34,5 +38,6 @@ namespace RegionSyd_Team8.Models
             FromAddress = fromAddress;
             ToAddress = toAddress;
         }
+
     }
 }

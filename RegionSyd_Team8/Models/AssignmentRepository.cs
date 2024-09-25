@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace RegionSyd_Team8.Models
 {
-    public class AssignmentRepository
+    public class AssignmentRepository : IRepository<Assignment>
     {
         public ObservableCollection<Assignment> Assignments { get; set; }
+
+        private readonly string _connectionString;
 
         public AssignmentRepository()
         {
             Assignments = new ObservableCollection<Assignment>();
+        }
+
+        public AssignmentRepository(string connectionString)
+        {
+            Assignments = new ObservableCollection<Assignment>();
+            _connectionString = connectionString;
         }
 
         public void AddAssignment(Assignment assignment)
@@ -29,5 +39,119 @@ namespace RegionSyd_Team8.Models
         {
             //implementation
         }
+
+
+
+
+
+        public IEnumerable<Assignment> GetAll()
+        {
+            var assignments = new List<Assignment>();
+            string query = "SELECT * FROM ASSIGNMENTS";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        assignments.Add(new Assignment
+                        {
+                            AssignmentID = (int)reader["AssignmentID"],
+                            Description = (string)reader["Description"],
+                            PickUpTime = (DateTime)reader["PickUpTime"],
+                            DropOffTime = (DateTime)reader["DropOffTime"],
+                            FromAddress = (string)reader["FromAddress"],
+                            ToAddress = (string)reader["ToAddress"],
+
+                        });
+                    }
+                }
+            }
+
+            return assignments;
+        }
+
+        public Assignment GetById(int id)
+        {
+            Assignment assignment = null;
+            string query = "SELECT * FROM ASSIGNMENTS WHERE AssignmentID = @AssignmentID";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@AssignmentID", id);
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        assignment = new Assignment
+                        {
+                            AssignmentID = (int)reader["AssignmentID"],
+                            Description = (string)reader["Description"],
+                            PickUpTime = (DateTime)reader["PickUpTime"],
+                            DropOffTime = (DateTime)reader["DropOffTime"],
+                            FromAddress = (string)reader["FromAddress"],
+                            ToAddress = (string)reader["ToAddress"],
+                        };
+                    }
+                }
+            }
+
+            return assignment;
+        }
+
+        public void Add(Assignment assignment)
+        {
+            string query = "INSERT INTO ASSIGMENTS (StartLocation1) VALUES (@StartLocation1)";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                //command.Parameters.AddWithValue("@AssignmentID", assignment.AssignmentID);
+                command.Parameters.AddWithValue("@Description", assignment.Description);
+                command.Parameters.AddWithValue("@PickUpTime", assignment.PickUpTime);
+                command.Parameters.AddWithValue("@DropOffTime", assignment.DropOffTime);
+                command.Parameters.AddWithValue("@StartLocation1", assignment.FromAddress);
+                command.Parameters.AddWithValue("@EndLocation1", assignment.ToAddress);
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void Update(Assignment assignment)
+        {
+            string query = "UPDATE ASSIGNMENTS SET Description = @Description WHERE AssignmentID = @AssignmentID";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Description", assignment.Description);
+                command.Parameters.AddWithValue("@AssignmentID", assignment.AssignmentID);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            string query = "DELETE FROM ASSIGNMENTS WHERE AssignmentID = @AssignmentID";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@AssignmentID", id);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
     }
 }
