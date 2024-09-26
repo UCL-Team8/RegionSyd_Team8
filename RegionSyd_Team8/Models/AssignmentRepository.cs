@@ -47,7 +47,7 @@ namespace RegionSyd_Team8.Models
         public IEnumerable<Assignment> GetAll()
         {
             var assignments = new List<Assignment>();
-            string query = "SELECT * FROM ASSIGNMENTS";
+            string query = "SELECT * FROM ASSIGMENTS";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -61,11 +61,11 @@ namespace RegionSyd_Team8.Models
                         assignments.Add(new Assignment
                         {
                             AssignmentID = (int)reader["AssignmentID"],
-                            Description = (string)reader["Description"],
-                            PickUpTime = (DateTime)reader["PickUpTime"],
-                            DropOffTime = (DateTime)reader["DropOffTime"],
-                            FromAddress = (string)reader["FromAddress"],
-                            ToAddress = (string)reader["ToAddress"],
+                            //Description = (string)reader["AssignmentDescription"],
+                            //PickUpTime = (DateTime)reader["PickUpTime"],
+                            //DropOffTime = (DateTime)reader["DropOffTime"],
+                            //FromAddress = (string)reader["FromAddress"],
+                           // ToAddress = (string)reader["ToAddress"],
 
                         });
                     }
@@ -78,7 +78,7 @@ namespace RegionSyd_Team8.Models
         public Assignment GetById(int id)
         {
             Assignment assignment = null;
-            string query = "SELECT * FROM ASSIGNMENTS WHERE AssignmentID = @AssignmentID";
+            string query = "SELECT * FROM ASSIGMENTS WHERE AssignmentID = @AssignmentID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -93,11 +93,11 @@ namespace RegionSyd_Team8.Models
                         assignment = new Assignment
                         {
                             AssignmentID = (int)reader["AssignmentID"],
-                            Description = (string)reader["Description"],
-                            PickUpTime = (DateTime)reader["PickUpTime"],
-                            DropOffTime = (DateTime)reader["DropOffTime"],
-                            FromAddress = (string)reader["FromAddress"],
-                            ToAddress = (string)reader["ToAddress"],
+                            //Description = (string)reader["AssignmentDescription"],
+                            //PickUpTime = (DateTime)reader["PickUpTime"],
+                            //DropOffTime = (DateTime)reader["DropOffTime"],
+                            //FromAddress = (string)reader["FromAddress"],
+                            //ToAddress = (string)reader["ToAddress"],
                         };
                     }
                 }
@@ -128,12 +128,12 @@ namespace RegionSyd_Team8.Models
 
         public void Update(Assignment assignment)
         {
-            string query = "UPDATE ASSIGNMENTS SET Description = @Description WHERE AssignmentID = @AssignmentID";
+            string query = "UPDATE ASSIGMENTS SET AssignmentDescription = @AssignmentDescription WHERE AssignmentID = @AssignmentID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Description", assignment.Description);
+                command.Parameters.AddWithValue("@AssignmentDescription", assignment.Description);
                 command.Parameters.AddWithValue("@AssignmentID", assignment.AssignmentID);
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -142,7 +142,7 @@ namespace RegionSyd_Team8.Models
 
         public void Delete(int id)
         {
-            string query = "DELETE FROM ASSIGNMENTS WHERE AssignmentID = @AssignmentID";
+            string query = "DELETE FROM ASSIGMENTS WHERE AssignmentID = @AssignmentID";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {

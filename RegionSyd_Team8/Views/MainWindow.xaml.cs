@@ -33,9 +33,7 @@ namespace RegionSyd_Team8
 
 
             string connectionString = ConnectionString;
-            IRepository<Assignment> assignmentRepository = new AssignmentRepository(connectionString);
 
-            assignmentRepository.Add(new Assignment { Description = "Kørsel", PickUpTime = DateTime.Now, DropOffTime = DateTime.Now, ToAddress = "Lundegårdsvej 14", FromAddress = "Lykkevej 4"});
         }
 
         //Event der trigges hver gang der vælges opgaver i ListBoxen
