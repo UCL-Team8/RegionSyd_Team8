@@ -8,7 +8,7 @@ namespace RegionSyd_Team8.Models
 {
     public class Assignment
     {
-        public int AssignmentID { get; set; } = 1;
+        public int AssignmentID { get; set; }
 
         public string Description { get; set; }
         public DateTime PickUpTime { get; set; }
