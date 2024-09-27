@@ -41,7 +41,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>-->
+        </ListBox>-->  
 
         <DataGrid
             x:Name="assignmentBox"
