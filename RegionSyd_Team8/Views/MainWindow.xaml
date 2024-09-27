@@ -47,7 +47,7 @@
             x:Name="assignmentBox"
             Grid.Column="1"
             Margin="10"
-            ItemsSource="{Binding Assignments}"
+            ItemsSource="{Binding AssignmentCollectionView}"
             SelectedItem="{Binding SelectedAssignment}"
             SelectionMode="Extended"
             SelectionChanged="AssignmentBox_SelectionChanged"
@@ -56,56 +56,115 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             RowBackground="White"
-            AlternatingRowBackground="GhostWhite">
+            AlternatingRowBackground="GhostWhite"
+            RowHeight="30"
+            MinRowHeight="30">
             <DataGrid.Columns>
-                <DataGridTextColumn 
-                    Header="OpgaveID" 
-                    Binding="{Binding AssignmentID}" 
-                    Width="1*"/>
+                <DataGridTextColumn
+                    Header="OpgaveID"
+                    Binding="{Binding AssignmentID}"
+                    Width="1*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style
+                            TargetType="TextBlock">
+                            <Setter
+                                Property="VerticalAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Beskrivelse"
                     Binding="{Binding Description}"
-                    Width="3*" />
+                    Width="3*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style
+                            TargetType="TextBlock">
+                            <Setter
+                                Property="VerticalAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Afhentningstid"
                     Binding="{Binding PickUpTime, StringFormat={}{0:dd-MM-yyyy HH:mm}}"
-                    Width="2*" />
+                    Width="2*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style
+                            TargetType="TextBlock">
+                            <Setter
+                                Property="VerticalAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Afsætningstid"
                     Binding="{Binding DropOffTime, StringFormat={}{0:dd-MM-yyyy HH:mm}}"
-                    Width="2*" />
+                    Width="2*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style
+                            TargetType="TextBlock">
+                            <Setter
+                                Property="VerticalAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Fra"
                     Binding="{Binding FromAddress}"
-                    Width="3*" />
+                    Width="3*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style
+                            TargetType="TextBlock">
+                            <Setter
+                                Property="VerticalAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Til"
                     Binding="{Binding ToAddress}"
-                    Width="3*" />
+                    Width="3*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style
+                            TargetType="TextBlock">
+                            <Setter
+                                Property="VerticalAlignment"
+                                Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         
         <StackPanel Margin="10">
-            <Label Content="Filtrering:"/>
-            <DatePicker 
-                Margin="0,0,0,10"
-                SelectedDate="{Binding FilterDate}"/>
-            <Button
+            <!--<Label Content="Filtrering:"/>-->
+            
+            <!--<Button
                 Content="Filtrér"
                 Height="40"
-                Margin="0,0,0,0" />
+                Margin="0,0,0,0" 
+                Command="{Binding FilterCommand}"/>-->
             <Label
                 Content="Søgning:" />
             <TextBox
-                Margin="0,0,0,10" />
-            <Button
+                Margin="0,0,0,10" 
+                Text="{Binding AssignmentFilter, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker
+                Margin="0,0,0,10"
+                SelectedDate="{Binding FilterDate, UpdateSourceTrigger=PropertyChanged}" />
+            <!--<Button
                 Content="Søg"
                 Height="40"
-                Margin="0,0,0,10" />
-            <Button
+                Margin="0,0,0,10" />-->
+            <!--<Button
                 Content="Vis alle opgaver"
                 Height="40"
-                Margin="0,0,0,10" />
+                Margin="0,0,0,10" />-->
             <Button
                 Content="Tilføj opgave"
                 Margin="0,0,0,10"
