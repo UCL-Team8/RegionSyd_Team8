@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:RegionSyd_Team8.Views"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="800">
-    <Grid>
-        
+
+
+
+    <Grid DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        <!-- Username -->
+        <TextBlock HorizontalAlignment="Center" Margin="0,129,0,0" TextWrapping="Wrap" Text="Brugernavn:" VerticalAlignment="Top" Width="228" Height="16"/>
+		<TextBox HorizontalAlignment="Center" Margin="0,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="227"
+		 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <!-- Password -->
+        <PasswordBox HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="228" PasswordChanged="PasswordBox_PasswordChanged" Height="27"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,196,0,0" TextWrapping="Wrap" Text="Adgangskode:" VerticalAlignment="Top" Height="16" Width="228"/>
+
+        <!-- Login Button -->
+        <Button Content="Login" Click="LoginButton_Click" Background="LightGreen" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Command="{Binding LoginCommand}" Height="21" Width="64"/>
+
+        <!-- Error Message -->
+        <TextBlock x:Name="ErrorMessageTextBlock" Foreground="Red" Visibility="{Binding ErrorVisibility}" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" Margin="0,320,0,0"/>
+
     </Grid>
 </Window>

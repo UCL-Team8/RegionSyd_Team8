@@ -38,11 +38,11 @@ namespace RegionSyd_Team8
 
         //Event der trigges hver gang der vælges opgaver i ListBoxen
         private void AssignmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {          
+        {
             var viewModel = DataContext as AssignmentViewModel;
             if (viewModel != null)
             {
-                viewModel.SelectedAssignments.Clear();              
+                viewModel.SelectedAssignments.Clear();
                 foreach (var assignment in assignmentBox.SelectedItems)
                 {
                     viewModel.SelectedAssignments.Add(assignment as Assignment);
