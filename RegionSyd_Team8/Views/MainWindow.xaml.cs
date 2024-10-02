@@ -21,6 +21,7 @@ namespace RegionSyd_Team8
     /// </summary>
     public partial class MainWindow : Window
     {
+        public AssignmentRepository assignmentRepository;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +35,12 @@ namespace RegionSyd_Team8
 
             string connectionString = ConnectionString;
 
+            assignmentRepository = new AssignmentRepository();
+
+            //assignmentRepository.Add(new Assignment { Description = "Kørsel", PickUpTime = DateTime.Now, DropOffTime = DateTime.Now, ToAddress = "Lundegårdsvej 14", FromAddress = "Lykkevej 4" });
+
         }
+
 
         //Event der trigges hver gang der vælges opgaver i ListBoxen
         private void AssignmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
