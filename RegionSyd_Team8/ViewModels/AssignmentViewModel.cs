@@ -65,6 +65,9 @@ namespace RegionSyd_Team8.ViewModels
         public RelayCommand UpdateCommand => new RelayCommand(execute => OpenUpdateWindow(), canExecute => CanOpenUpdateWindow());
         public RelayCommand CombineCommand => new RelayCommand(execute => OpenCombinationWindow(), canExecute => CanOpenCombinationWindow());
 
+        public RelayCommand DeleteCommand => new RelayCommand(execute => RemoveAssignment());
+
+
         //Constructor
         public AssignmentViewModel() 
         {          
@@ -141,5 +144,11 @@ namespace RegionSyd_Team8.ViewModels
         {
             return SelectedAssignments.Count == 2;
         }
+
+        public void RemoveAssignment()
+        {
+            Assignments.Remove(SelectedAssignment);
+        }
+
     }
 }

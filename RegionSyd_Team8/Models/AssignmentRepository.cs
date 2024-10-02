@@ -33,6 +33,7 @@ namespace RegionSyd_Team8.Models
 
         public void RemoveAssignment(Assignment assignment)
         {
+            Assignments.Remove(assignment);
         }
 
         public void UpdateAssignment(Assignment assignment)
