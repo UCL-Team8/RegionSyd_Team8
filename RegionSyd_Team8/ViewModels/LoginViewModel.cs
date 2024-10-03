@@ -19,13 +19,17 @@ namespace RegionSyd_Team8.ViewModels
         public UserRepository _userRepository { get; set; }
         private Visibility _errorVisibility;
 
-        public ICommand LoginCommand { get; set; }
+        //RelayCommands
+        public RelayCommand LoginCommand => new RelayCommand(execute => Login());
+
+        //public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()
         {
             _userRepository = new UserRepository();
+            
             ErrorVisibility = Visibility.Collapsed;
-            LoginCommand = new RelayCommand(param => Login());
+            //LoginCommand = new RelayCommand(param => Login());
         }
 
         public string Username
@@ -76,7 +80,9 @@ namespace RegionSyd_Team8.ViewModels
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
 
-                MessageBox.Show("MainWindow should be visible now.");//Debug
+                //MessageBox.Show("MainWindow should be visible now.");//Debug
+
+                Application.Current.Windows[0].DialogResult = true;
                 Application.Current.Windows[0]?.Close();
             }
             else
@@ -85,8 +91,5 @@ namespace RegionSyd_Team8.ViewModels
                 ErrorVisibility = Visibility.Visible;
             }
         }
-
-
-
     }
 } 

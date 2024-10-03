@@ -11,6 +11,9 @@ namespace RegionSyd_Team8
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            //Added
+            Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
             var loginWindow = new Views.LoginWindow();
             bool? dialogResult = loginWindow.ShowDialog();
 
@@ -18,10 +21,18 @@ namespace RegionSyd_Team8
             {
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
+
+                //Added
+                Application.Current.MainWindow = mainWindow;
+
+                Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             }
             else
             {
-                Shutdown();
+                //Shutdown();
+
+                //Added
+                Application.Current.Shutdown();
             }
 
         }
