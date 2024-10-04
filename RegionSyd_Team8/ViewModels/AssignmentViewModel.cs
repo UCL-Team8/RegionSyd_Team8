@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Input;
-using RegionSyd_Team8.Models;
+﻿using RegionSyd_Team8.Models;
 using RegionSyd_Team8.MVVM;
 using RegionSyd_Team8.Views;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace RegionSyd_Team8.ViewModels
 {
@@ -27,8 +20,8 @@ namespace RegionSyd_Team8.ViewModels
         public ICollectionView AssignmentCollectionView
         {
             get { return assignmentCcollectionView; }
-            set 
-            { 
+            set
+            {
                 assignmentCcollectionView = value;
                 OnPropertyChanged(nameof(AssignmentCollectionView));
             }
@@ -39,8 +32,8 @@ namespace RegionSyd_Team8.ViewModels
         public string AssignmentFilter
         {
             get { return assignmentFilter; }
-            set 
-            { 
+            set
+            {
                 assignmentFilter = value;
                 OnPropertyChanged(nameof(AssignmentFilter));
                 AssignmentCollectionView.Refresh();
@@ -53,8 +46,8 @@ namespace RegionSyd_Team8.ViewModels
         public DateTime? FilterDate
         {
             get { return filterDate; }
-            set 
-            { 
+            set
+            {
                 filterDate = value;
                 OnPropertyChanged(nameof(FilterDate));
                 AssignmentCollectionView.Refresh();
@@ -66,11 +59,11 @@ namespace RegionSyd_Team8.ViewModels
         public RelayCommand CombineCommand => new RelayCommand(execute => OpenCombinationWindow(), canExecute => CanOpenCombinationWindow());
 
         //Constructor
-        public AssignmentViewModel() 
-        {          
+        public AssignmentViewModel()
+        {
             //The Assignments are only for testing purposes            
             Assignments = new ObservableCollection<Assignment>();
-            SelectedAssignments = new ObservableCollection<Assignment>();         
+            SelectedAssignments = new ObservableCollection<Assignment>();
 
             AssignmentCollectionView = CollectionViewSource.GetDefaultView(Assignments);
             AssignmentCollectionView.Filter = FilterAssignments;
@@ -80,10 +73,10 @@ namespace RegionSyd_Team8.ViewModels
 
             for (int i = 0; i < 30; i++)
             {
-                Assignments.Add(new Assignment("Hent patient 0 fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1"));
-            }           
+                Assignments.Add(new Assignment("Hent patient 0 fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1", false, false));
+            }
         }
-        
+
         public Assignment SelectedAssignment { get; set; }
 
         //Bool for filtering

@@ -13,5 +13,6 @@ namespace RegionSyd_Team8.Models
         void Add(T entity);
         void Update(T entity);
         void Delete(int id);
+    
     }
 }
