@@ -77,13 +77,23 @@ namespace RegionSyd_Team8.ViewModels
             var user = _userRepository.FindUser(Username, Password);
             if (user != null)
             {
-                var mainWindow = new MainWindow();
-                mainWindow.Show();
+                //var mainWindow = new MainWindow();
+                //mainWindow.Show();
 
                 //MessageBox.Show("MainWindow should be visible now.");//Debug
 
-                Application.Current.Windows[0].DialogResult = true;
-                Application.Current.Windows[0]?.Close();
+                //Application.Current.Windows[0].DialogResult = true;
+                //Application.Current.Windows[0]?.Close();
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window is LoginWindow)
+                    {
+                        window.DialogResult = true;
+                        window.Close();
+                        break;
+                    }
+                }
             }
             else
             {
