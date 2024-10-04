@@ -25,6 +25,7 @@
 
         public Assignment()
         {
+            AssignmentID = NextID++;
         }
         public Assignment(string description, DateTime pickUpTime, DateTime dropOffTime, string fromAddress, string toAddress, bool combined, bool done)
         {

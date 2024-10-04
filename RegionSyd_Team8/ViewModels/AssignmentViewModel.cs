@@ -138,14 +138,24 @@ namespace RegionSyd_Team8.ViewModels
 
             combinationWindow.ShowDialog();
 
-            Assignments = new ObservableCollection<Assignment>(Assignments);
-            OnPropertyChanged(nameof(Assignments));
-            AssignmentCollectionView.Refresh();
+            Assignment NewCombinedAssignment = combinationViewModel.CombinedAssignment;
+
+            if (NewCombinedAssignment != null)
+            {
+                Assignments.Add(NewCombinedAssignment);
+                Assignments.Remove(SelectedAssignments[1]);
+                Assignments.Remove(SelectedAssignments[0]);
+
+                OnPropertyChanged(nameof(Assignments));
+                AssignmentCollectionView.Refresh();
+
+                SelectedAssignments.Clear();
+            }            
         }
 
         private bool CanOpenCombinationWindow()
         {
-            return SelectedAssignments.Count == 2;
+            return SelectedAssignments.Count == 2 && SelectedAssignments[0].Combined == false && SelectedAssignments[1].Combined == false;
         }
 
         public void RemoveAssignment()

@@ -42,7 +42,7 @@ namespace RegionSyd_Team8
         }
 
 
-        //Event der trigges hver gang der vælges opgaver i ListBoxen
+        //Event which is triggered every time assignments are selected in the data grid
         private void AssignmentBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var viewModel = DataContext as AssignmentViewModel;
@@ -55,5 +55,15 @@ namespace RegionSyd_Team8
                 }
             }
         }
+
+        ////Event which is triggered when loading rows
+        //private void AssignmentBox_LoadingRow(object sender, DataGridRowEventArgs e)
+        //{
+        //    var item = e.Row.Item as Assignment;
+        //    if (item != null && item.Combined)
+        //    {
+        //        e.Row.Background = new SolidColorBrush(Colors.LightGreen);
+        //    }
+        //}
     }
 }
