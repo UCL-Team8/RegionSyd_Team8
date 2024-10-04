@@ -77,6 +77,5 @@
                 Margin="5,0,0,5"
                 Text="{Binding Assignment2.Description}" />
         </StackPanel>
-
     </Grid>
 </Window>

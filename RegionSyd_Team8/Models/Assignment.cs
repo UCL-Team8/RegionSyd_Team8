@@ -29,6 +29,7 @@ namespace RegionSyd_Team8.Models
 
         public Assignment()
         {
+            AssignmentID = NextID++;
         }
         public Assignment(string description, DateTime pickUpTime, DateTime dropOffTime, string fromAddress, string toAddress)
         {

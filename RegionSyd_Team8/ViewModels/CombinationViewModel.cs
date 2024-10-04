@@ -13,7 +13,8 @@ namespace RegionSyd_Team8.ViewModels
     internal class CombinationViewModel : ViewModelBase
     {
         public ObservableCollection<Assignment> Combinations;
-        
+
+        public Assignment CombinedAssignment { get; set; }
         public Assignment Assignment1 { get; set; }
         public Assignment Assignment2 { get; set; }
         
@@ -32,10 +33,14 @@ namespace RegionSyd_Team8.ViewModels
         
         private void Combine(object parameter)
         {
-            Assignment CombinedAssignment = new Assignment();
-            CombinedAssignment.Description = Assignment1.Description;
-            CombinedAssignment.Description2 = Assignment2.Description;
-            CombinedAssignment.Combined = true;
+            Assignment NewAssignment = new Assignment
+            {
+                Description = Assignment1.Description,
+                Description2 = Assignment2.Description,
+                Combined = true
+            };
+
+            CombinedAssignment = NewAssignment;
 
             if (parameter is CombinationWindow combinationWindow)
             {
