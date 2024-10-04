@@ -65,7 +65,7 @@ namespace RegionSyd_Team8.ViewModels
         public RelayCommand UpdateCommand => new RelayCommand(execute => OpenUpdateWindow(), canExecute => CanOpenUpdateWindow());
         public RelayCommand CombineCommand => new RelayCommand(execute => OpenCombinationWindow(), canExecute => CanOpenCombinationWindow());
 
-        public RelayCommand DeleteCommand => new RelayCommand(execute => RemoveAssignment());
+        public RelayCommand DeleteCommand => new RelayCommand(execute => RemoveAssignment(), canExecute => CanRemoveAssignment());
 
 
         //Constructor
@@ -78,9 +78,10 @@ namespace RegionSyd_Team8.ViewModels
             AssignmentCollectionView = CollectionViewSource.GetDefaultView(Assignments);
             AssignmentCollectionView.Filter = FilterAssignments;
 
-            //FilterDate = DateTime.Now;
+            //FilterDate is null so it can be used to filter when clicked
             FilterDate = null;
 
+            Assignments.Add(new Assignment("Hent patient John fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1"));
             for (int i = 0; i < 30; i++)
             {
                 Assignments.Add(new Assignment("Hent patient 0 fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1"));
@@ -136,8 +137,17 @@ namespace RegionSyd_Team8.ViewModels
 
         private void OpenCombinationWindow()
         {
-            CombinationWindow combinationWindow = new CombinationWindow();
+            CombinationViewModel combinationViewModel = new CombinationViewModel(SelectedAssignments);
+            CombinationWindow combinationWindow = new CombinationWindow
+            {
+                DataContext = combinationViewModel
+            };
+
             combinationWindow.ShowDialog();
+
+            Assignments = new ObservableCollection<Assignment>(Assignments);
+            OnPropertyChanged(nameof(Assignments));
+            AssignmentCollectionView.Refresh();
         }
 
         private bool CanOpenCombinationWindow()
@@ -150,5 +160,9 @@ namespace RegionSyd_Team8.ViewModels
             Assignments.Remove(SelectedAssignment);
         }
 
+        private bool CanRemoveAssignment()
+        {
+            return SelectedAssignments.Count == 1;
+        }
     }
 }

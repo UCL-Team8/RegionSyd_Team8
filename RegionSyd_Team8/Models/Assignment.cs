@@ -16,8 +16,10 @@ namespace RegionSyd_Team8.Models
         public string FromAddress { get; set; }
         public string ToAddress { get; set; }
 
+        public string Description2 { get; set; } = "";
         public string FromAddress2 { get; set; } = "";
         public string ToAddress2 { get; set; } = "";
+        
         public bool Combined { get; set; }
         public bool Done { get; set; }
 
