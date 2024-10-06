@@ -118,9 +118,11 @@ namespace RegionSyd_Team8.ViewModels
             updateWindow.ShowDialog();
 
             //Adds a new list to Assignments as the list wouldn't update otherwise
-            Assignments = new ObservableCollection<Assignment>(Assignments);
+            //Assignments = new ObservableCollection<Assignment>(Assignments);
             OnPropertyChanged(nameof(Assignments));
             AssignmentCollectionView.Refresh();
+
+            SelectedAssignments.Clear();
         }
 
         private bool CanOpenUpdateWindow()

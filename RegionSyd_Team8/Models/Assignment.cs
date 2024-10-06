@@ -10,9 +10,9 @@
         public string FromAddress { get; set; }
         public string ToAddress { get; set; }
 
-        public string Description2 { get; set; } = "";
-        public string FromAddress2 { get; set; } = "";
-        public string ToAddress2 { get; set; } = "";
+        public string Description2 { get; set; }
+        public string FromAddress2 { get; set; }
+        public string ToAddress2 { get; set; }
         public DateTime PickUpTime2 { get; set; }
         public DateTime DropOffTime2 { get; set; }
 
@@ -25,7 +25,8 @@
 
         public Assignment()
         {
-            AssignmentID = NextID++;
+            //AssignmentID = NextID;
+            //NextID++;
         }
         public Assignment(string description, DateTime pickUpTime, DateTime dropOffTime, string fromAddress, string toAddress, bool combined, bool done)
         {
@@ -38,6 +39,23 @@
             ToAddress = toAddress;
             Combined = combined;
             Done = done;
+        }
+
+        public Assignment(string description, string description2, DateTime pickUpTime, DateTime pickUpTime2, DateTime dropOffTime, DateTime dropOffTime2, string fromAddress, string fromAddress2, string toAddress, string toAddress2, bool combined)
+        {
+            AssignmentID = NextID;
+            NextID++;
+            Description = description;
+            Description2 = description2;
+            PickUpTime = pickUpTime;
+            PickUpTime2 = pickUpTime2;
+            DropOffTime = dropOffTime;
+            DropOffTime2 = dropOffTime2;
+            FromAddress = fromAddress;
+            FromAddress2 = fromAddress2;
+            ToAddress = toAddress;
+            ToAddress2 = toAddress2;
+            Combined = combined;
         }
 
         public Assignment(string description, string description2, DateTime pickUpTime, DateTime dropOffTime, DateTime pickUpTime2, DateTime dropOffTime2, string fromAddress, string toAddress, string fromAddress2, string toAddress2, bool combined, bool done)
