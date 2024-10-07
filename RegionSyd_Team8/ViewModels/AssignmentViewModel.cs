@@ -60,6 +60,8 @@ namespace RegionSyd_Team8.ViewModels
 
         public RelayCommand DeleteCommand => new RelayCommand(execute => RemoveAssignment(), canExecute => CanRemoveAssignment());
 
+        public RelayCommand AddWindowCommand => new RelayCommand(execute => OpenAddCommand());
+
 
         //Constructor
         public AssignmentViewModel()
@@ -157,5 +159,25 @@ namespace RegionSyd_Team8.ViewModels
         {
             return SelectedAssignments.Count == 1;
         }
+
+        private void OpenAddCommand()
+
+        {
+
+            AddViewModel addViewModel = new AddViewModel();
+            AddWindow addWindow = new AddWindow
+            {
+                DataContext = addViewModel
+            };
+
+            addWindow.ShowDialog();
+            Assignment AddedAssignment = addViewModel.NewAssignment;
+            Assignments.Add(AddedAssignment);
+            OnPropertyChanged(nameof(Assignments));
+            AssignmentCollectionView.Refresh();
+
+        }
+
+
     }
 }
