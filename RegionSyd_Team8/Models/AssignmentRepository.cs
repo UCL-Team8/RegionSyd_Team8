@@ -62,11 +62,11 @@ namespace RegionSyd_Team8.Models
                         assignments.Add(new Assignment
                         {
                             AssignmentID = (int)reader["AssignmentID"],
-                            //Description = (string)reader["AssignmentDescription"],
-                            //PickUpTime = (DateTime)reader["PickUpTime"],
-                            //DropOffTime = (DateTime)reader["DropOffTime"],
-                            //FromAddress = (string)reader["FromAddress"],
-                           // ToAddress = (string)reader["ToAddress"],
+                            Description = (string)reader["AssignmentDescription"],
+                            PickUpTime = (DateTime)reader["PickUpTime"],
+                            DropOffTime = (DateTime)reader["DropOffTime"],
+                            FromAddress = (string)reader["StartLocation1"],
+                            ToAddress = (string)reader["EndLocation1"],
 
                         });
                     }
@@ -94,11 +94,11 @@ namespace RegionSyd_Team8.Models
                         assignment = new Assignment
                         {
                             AssignmentID = (int)reader["AssignmentID"],
-                            //Description = (string)reader["AssignmentDescription"],
-                            //PickUpTime = (DateTime)reader["PickUpTime"],
-                            //DropOffTime = (DateTime)reader["DropOffTime"],
-                            //FromAddress = (string)reader["FromAddress"],
-                            //ToAddress = (string)reader["ToAddress"],
+                            Description = (string)reader["AssignmentDescription"],
+                            PickUpTime = (DateTime)reader["PickUpTime"],
+                            DropOffTime = (DateTime)reader["DropOffTime"],
+                            FromAddress = (string)reader["FromAddress"],
+                            ToAddress = (string)reader["ToAddress"],
                         };
                     }
                 }
@@ -109,13 +109,13 @@ namespace RegionSyd_Team8.Models
 
         public void Add(Assignment assignment)
         {
-            string query = "INSERT INTO ASSIGMENTS (StartLocation1) VALUES (@StartLocation1)";
+            string query = "INSERT INTO ASSIGMENTS (AssignmentID, AssignmentDescription, PickUpTime, DropOffTime, StartLocation1, EndLocation1) VALUES (@AssignmentID, @AssignmentDescription, @PickUpTime, @DropOffTime, @StartLocation1, @EndLocation1)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
-                //command.Parameters.AddWithValue("@AssignmentID", assignment.AssignmentID);
-                command.Parameters.AddWithValue("@Description", assignment.Description);
+                command.Parameters.AddWithValue("@AssignmentID", assignment.AssignmentID);
+                command.Parameters.AddWithValue("@AssignmentDescription", assignment.Description);
                 command.Parameters.AddWithValue("@PickUpTime", assignment.PickUpTime);
                 command.Parameters.AddWithValue("@DropOffTime", assignment.DropOffTime);
                 command.Parameters.AddWithValue("@StartLocation1", assignment.FromAddress);
