@@ -97,8 +97,8 @@ namespace RegionSyd_Team8.Models
                             Description = (string)reader["AssignmentDescription"],
                             PickUpTime = (DateTime)reader["PickUpTime"],
                             DropOffTime = (DateTime)reader["DropOffTime"],
-                            FromAddress = (string)reader["FromAddress"],
-                            ToAddress = (string)reader["ToAddress"],
+                            FromAddress = (string)reader["StartLocation1"],
+                            ToAddress = (string)reader["EndLocation1"],
                         };
                     }
                 }
