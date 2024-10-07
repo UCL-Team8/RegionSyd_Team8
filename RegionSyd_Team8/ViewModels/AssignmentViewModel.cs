@@ -4,11 +4,17 @@ using RegionSyd_Team8.Views;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace RegionSyd_Team8.ViewModels
 {
     public class AssignmentViewModel : ViewModelBase
     {
+
+        IRepository<Assignment> assignmentRepository = new AssignmentRepository("Server=localhost;Database=regsyd;Trusted_Connection=True;TrustServerCertificate=true;");
         //Observable Collections
         public ObservableCollection<Assignment> Assignments { get; set; }
         //SelectedAssignments keeps track of how many assignments are selected in the datagrid
@@ -65,7 +71,7 @@ namespace RegionSyd_Team8.ViewModels
         public AssignmentViewModel()
         {
             //The Assignments are only for testing purposes            
-            Assignments = new ObservableCollection<Assignment>();
+            Assignments = (ObservableCollection<Assignment>)assignmentRepository.GetAll();
             SelectedAssignments = new ObservableCollection<Assignment>();
 
             AssignmentCollectionView = CollectionViewSource.GetDefaultView(Assignments);
@@ -74,11 +80,11 @@ namespace RegionSyd_Team8.ViewModels
             //FilterDate is null so it can be used to filter when clicked
             FilterDate = null;
 
-            Assignments.Add(new Assignment("Hent patient John fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1", false, false));
-            for (int i = 0; i < 30; i++)
-            {
-                Assignments.Add(new Assignment("Hent patient 0 fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1", false, false));
-            }
+            //Assignments.Add(new Assignment("Hent patient John fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1", false, false));
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    Assignments.Add(new Assignment("Hent patient 0 fra hospitalet", DateTime.Now, DateTime.Now, "Hospitalsvej 1", "Husvej 1", false, false));
+            //}
         }
 
         public Assignment SelectedAssignment { get; set; }

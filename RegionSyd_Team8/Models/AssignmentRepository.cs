@@ -47,7 +47,7 @@ namespace RegionSyd_Team8.Models
 
         public IEnumerable<Assignment> GetAll()
         {
-            var assignments = new List<Assignment>();
+            var assignments = new ObservableCollection<Assignment>();
             string query = "SELECT * FROM ASSIGMENTS";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
