@@ -28,34 +28,6 @@ namespace RegionSyd_Team8
             AssignmentViewModel vm = new AssignmentViewModel();
             DataContext = vm;
 
-            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-
-            string? ConnectionString = config.GetConnectionString("DefaultConnection");
-
-
-            string connectionString = ConnectionString;
-
-            IRepository<Assignment> assignmentRepository = new AssignmentRepository(connectionString);
-
-            assignmentRepository.Add(new Assignment { Description = "Kørsel", PickUpTime = DateTime.Now, DropOffTime = DateTime.Now, ToAddress = "Lundegårdsvej 14", FromAddress = "Lykkevej 4" });
-
-            // Getting all assignments
-            var assignments = assignmentRepository.GetAll();
-            foreach (var assignment in assignments)
-            {
-                Console.WriteLine($"Product ID: {assignment.AssignmentID}, ProductName: {assignment.Description}");
-            }
-
-            //// Updating a product
-            //var firstAssignment = assignmentRepository.GetById(1);
-            //if (firstAssignment != null)
-            //{
-            //    firstAssignment.AssignmentID = 1;
-            //    assignmentRepository.Update(firstAssignment);
-            //}
-
-            // Deleting a product
-            assignmentRepository.Delete(1);
         }
 
 

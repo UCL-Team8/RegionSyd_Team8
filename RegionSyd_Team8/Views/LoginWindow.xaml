@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegionSyd_Team8.Views"
         mc:Ignorable="d"
-        Title="Login-Vindue" Height="450" Width="800">
+        Title="Login-Vindue" Height="450" Width="800" >
 
 
 
@@ -21,7 +21,7 @@
         <TextBlock HorizontalAlignment="Center" Margin="0,196,0,0" TextWrapping="Wrap" Text="Adgangskode:" VerticalAlignment="Top" Height="16" Width="228"/>
 
         <!-- Login Button -->
-        <Button Content="Login" Background="LightGreen" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Command="{Binding LoginCommand}" Height="21" Width="64"/>
+        <Button Content="Login" Background="#626828" HorizontalAlignment="Center" Margin="0,278,0,0" VerticalAlignment="Top" Command="{Binding LoginCommand}" Height="21" Width="64"/>
         <!-- Click="LoginButton_Click" -->
 
         <!-- Error Message -->
