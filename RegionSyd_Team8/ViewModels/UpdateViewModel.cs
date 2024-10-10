@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using RegionSyd_Team8.Models;
+﻿using RegionSyd_Team8.Models;
 using RegionSyd_Team8.MVVM;
 using RegionSyd_Team8.Views;
 
@@ -49,7 +43,7 @@ namespace RegionSyd_Team8.ViewModels
         public UpdateViewModel(Assignment selectedAssignment)
         {
             CurrentAssignment = selectedAssignment;
-            
+
             SelectedPickUpTime = CurrentAssignment.PickUpTime;
             CurrentPickUpTime = TimeOnly.FromDateTime(selectedAssignment.PickUpTime).ToString();
             SelectedDropOffTime = CurrentAssignment.DropOffTime;
@@ -71,7 +65,7 @@ namespace RegionSyd_Team8.ViewModels
         //Help method for time managing
         private void UpdateCombinedPickUpDateTime()
         {
-            if (TimeSpan.TryParse(CurrentPickUpTime, out TimeSpan time)) 
+            if (TimeSpan.TryParse(CurrentPickUpTime, out TimeSpan time))
             {
                 CombinedPickUpDateTime = SelectedPickUpTime.Date + time;
             }
@@ -79,7 +73,7 @@ namespace RegionSyd_Team8.ViewModels
             {
                 CombinedDropOffDateTime = SelectedDropOffTime.Date + time2;
             }
-            
+
             if (TimeSpan.TryParse(CurrentPickUpTime2, out TimeSpan time3))
             {
                 CombinedPickUpDateTime2 = SelectedPickUpTime2.Date + time3;
