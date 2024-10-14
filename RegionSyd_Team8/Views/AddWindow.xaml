@@ -28,8 +28,8 @@
                 Command="{Binding CancelAddCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </StackPanel>
-        
-               
+
+
 
         <StackPanel Grid.Column="1" Margin="10">
             <Grid Margin="10">

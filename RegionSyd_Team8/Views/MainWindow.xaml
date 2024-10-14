@@ -41,7 +41,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>-->  
+        </ListBox>-->
 
         <DataGrid
             x:Name="assignmentBox"
@@ -137,7 +137,7 @@
                                 Value="Center" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>                
+                </DataGridTextColumn>
                 <DataGridCheckBoxColumn
                     Header="Kombination?"
                     Binding="{Binding Combined}"
@@ -155,10 +155,10 @@
                 </DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <StackPanel Margin="10">
             <!--<Label Content="Filtrering:"/>-->
-            
+
             <!--<Button
                 Content="Filtrér"
                 Height="40"
@@ -186,7 +186,7 @@
                 Height="40"
                 Command="{Binding AddWindowCommand}"
                 />
-                
+
             <Button
                 Content="Redigér opgave"
                 Margin="0,0,0,10"

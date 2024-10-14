@@ -72,7 +72,9 @@ namespace RegionSyd_Team8.ViewModels
         //Constructor
         public AssignmentViewModel()
         {
-            //The Assignments are only for testing purposes            
+            //The Assignments are only for testing purposes
+            //
+            //Assignments = new ObservableCollection<Assignment>()
             Assignments = (ObservableCollection<Assignment>)assignmentRepository.GetAll();
             SelectedAssignments = new ObservableCollection<Assignment>();
 
@@ -160,7 +162,7 @@ namespace RegionSyd_Team8.ViewModels
                 AssignmentCollectionView.Refresh();
 
                 SelectedAssignments.Clear();
-            }            
+            }
         }
 
         private bool CanOpenCombinationWindow()
@@ -190,7 +192,11 @@ namespace RegionSyd_Team8.ViewModels
 
             addWindow.ShowDialog();
             Assignment AddedAssignment = addViewModel.NewAssignment;
-            Assignments.Add(AddedAssignment);
+            if (AddedAssignment is not null)
+            {
+                Assignments.Add(AddedAssignment);
+                assignmentRepository.Add(AddedAssignment);
+            }
             OnPropertyChanged(nameof(Assignments));
             AssignmentCollectionView.Refresh();
 

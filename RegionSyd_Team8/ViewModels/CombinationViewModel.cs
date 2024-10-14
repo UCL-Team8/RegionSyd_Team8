@@ -13,17 +13,17 @@ namespace RegionSyd_Team8.ViewModels
     internal class CombinationViewModel : ViewModelBase
     {
         public ObservableCollection<Assignment> Combinations { get; set; }
-        
+
         public Assignment CombinedAssignment { get; set; }
         public Assignment Assignment1 { get; set; }
         public Assignment Assignment2 { get; set; }
-        
+
         //RelayCommands
         public RelayCommand CombineCommand => new RelayCommand(execute => Combine(execute));
         public RelayCommand CancelCombinationCommand => new RelayCommand(execute => CancelCombinationAndCloseWindow(execute));
         public RelayCommand SwitchCommand => new RelayCommand(execute => SwitchOrder());
 
-        public CombinationViewModel(ObservableCollection<Assignment> selectedAssignments) 
+        public CombinationViewModel(ObservableCollection<Assignment> selectedAssignments)
         {
             Combinations = new ObservableCollection<Assignment>();
             Combinations = selectedAssignments;
@@ -32,7 +32,7 @@ namespace RegionSyd_Team8.ViewModels
             Assignment1 = Combinations[0];
             Assignment2 = Combinations[1];
         }
-        
+
         private void Combine(object parameter)
         {
             //Assignment NewAssignment = new Assignment
@@ -77,7 +77,7 @@ namespace RegionSyd_Team8.ViewModels
                 Assignment temp = Assignment1;
                 Assignment1 = Assignment2;
                 Assignment2 = temp;
-                
+
                 OnPropertyChanged(nameof(Assignment1));
                 OnPropertyChanged(nameof(Assignment2));
             }
