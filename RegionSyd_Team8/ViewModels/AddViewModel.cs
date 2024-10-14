@@ -1,6 +1,7 @@
 ﻿using RegionSyd_Team8.Models;
 using RegionSyd_Team8.MVVM;
 using RegionSyd_Team8.Views;
+using System.Windows;
 
 namespace RegionSyd_Team8.ViewModels
 {
@@ -19,7 +20,7 @@ namespace RegionSyd_Team8.ViewModels
             set
             {
                 _pickUpTimeDate = value;
-                UpdateCombinedPickUpTime();
+                //UpdateCombinedPickUpTime();
             }
         }
 
@@ -32,7 +33,7 @@ namespace RegionSyd_Team8.ViewModels
             set
             {
                 _pickUpTimeString = value;
-                UpdateCombinedPickUpTime();
+                //UpdateCombinedPickUpTime();
             }
         }
 
@@ -49,7 +50,7 @@ namespace RegionSyd_Team8.ViewModels
             set
             {
                 _dropOffTimeDate = value;
-                UpdateCombinedDropOffTime();
+                //UpdateCombinedDropOffTime();
             }
         }
 
@@ -76,6 +77,8 @@ namespace RegionSyd_Team8.ViewModels
 
         public RelayCommand AddTaskCommand => new RelayCommand(execute => AddNewTaskCommand(execute));
 
+        public RelayCommand CancelAddCommand => new RelayCommand(execute => CancelTaskAndCloseWindow(execute));
+
         // Help Method to update the combined pick-up time
         //class internal method
         private void UpdateCombinedPickUpTime()
@@ -95,34 +98,85 @@ namespace RegionSyd_Team8.ViewModels
 
                 CombinedPickUpTime = PickUpTimeDate.Date + time;
             }
+
+            //else
+            //{
+            //    MessageBox.Show("Ugyldigt tidsformat for afhentningstid. Angiv i formatet HH:mm.",
+            //                    "Fejl",
+            //                    MessageBoxButton.OK,
+            //                    MessageBoxImage.Warning);
+            //}
+
         }
 
-        //  Help Method to update the combined drop-off time
-        //class internal method
         private void UpdateCombinedDropOffTime()
         {
             if (TimeSpan.TryParse(DropOffTimeString, out TimeSpan time))
             {
                 CombinedDropOffTime = DropOffTimeDate.Date + time;
             }
+            //else
+            //{
+            //    MessageBox.Show("Ugyldigt tidsformat for afleveringstid. Angiv i formatet HH:mm.",
+            //                    "Fejl",
+            //                    MessageBoxButton.OK,
+            //                    MessageBoxImage.Warning);
+            //}
+
+
+
         }
+
+        //  Help Method to update the combined drop-off time
+        //class internal method
+        //private void UpdateCombinedDropOffTime()
+        //{
+        //    if (TimeSpan.TryParse(DropOffTimeString, out TimeSpan time))
+        //    {
+        //        CombinedDropOffTime = DropOffTimeDate.Date + time;
+        //    }
+        //}
 
         private void AddNewTaskCommand(object parameter)
         {
-            // Use CombinedPickUpTime and CombinedDropOffTime for the assignment
-            NewAssignment = new Assignment(Description, CombinedPickUpTime, CombinedDropOffTime, FromAddress, ToAddress, false, false);
 
-            if (parameter is AddWindow addWindow)
+            // Use CombinedPickUpTime and CombinedDropOffTime for the assignment
+            UpdateCombinedPickUpTime();
+            UpdateCombinedDropOffTime();
+
+            if (CombinedPickUpTime != default && CombinedDropOffTime != default)
             {
-                addWindow.DialogResult = true;
-                addWindow.Close();
+                NewAssignment = new Assignment(Description, CombinedPickUpTime, CombinedDropOffTime, FromAddress, ToAddress, false, false);
+
+                if (parameter is AddWindow addWindow)
+                {
+                    addWindow.DialogResult = true;
+                    addWindow.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Indtast venligst gyldige afhentnings- og afleveringstider, før du tilføjer en opgave.",
+                      "Ugyldige tider",
+                      MessageBoxButton.OK,
+                     MessageBoxImage.Warning);
+            }
+        }
+
+
+        private void CancelTaskAndCloseWindow(object parameter)
+        {
+            if (parameter is AddWindow updateWindow)
+            {
+                updateWindow.DialogResult = false;
+                updateWindow.Close();
             }
         }
     }
 
-
-
-
-
 }
+
+
+
+
 
