@@ -68,7 +68,7 @@
                 Margin="5,0,0,5"
                 Text="{Binding Assignment1.FromAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
-        
+
         <Button
             Margin="10,0,10,0"
             Grid.Column="2"
@@ -76,7 +76,7 @@
             Height="40"
             Command="{Binding SwitchCommand}"
             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
-             
+
         <StackPanel
             Grid.Column="3"
             Margin="10"

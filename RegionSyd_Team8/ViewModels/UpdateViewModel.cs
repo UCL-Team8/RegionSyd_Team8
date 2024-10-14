@@ -1,4 +1,11 @@
-﻿using RegionSyd_Team8.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using RegionSyd_Team8.Models;
 using RegionSyd_Team8.MVVM;
 using RegionSyd_Team8.Views;
 
@@ -87,24 +94,35 @@ namespace RegionSyd_Team8.ViewModels
         //Methods for RelayCommands
         private void SaveUpdateAndCloseWindow(object parameter)
         {
+
             UpdateCombinedPickUpDateTime();
 
-            CurrentAssignment.Description = UpdateDescription;
-            CurrentAssignment.PickUpTime = CombinedPickUpDateTime;
-            CurrentAssignment.DropOffTime = CombinedDropOffDateTime;
-            CurrentAssignment.FromAddress = UpdateFromAddress;
-            CurrentAssignment.ToAddress = UpdateToAddress;
-
-            CurrentAssignment.Description2 = UpdateDescription2;
-            CurrentAssignment.PickUpTime2 = CombinedPickUpDateTime2;
-            CurrentAssignment.DropOffTime2 = CombinedDropOffDateTime2;
-            CurrentAssignment.FromAddress2 = UpdateFromAddress2;
-            CurrentAssignment.ToAddress2 = UpdateToAddress2;
-
-            if (parameter is UpdateWindow updateWindow)
+            if (CombinedPickUpDateTime != default && CombinedDropOffDateTime != default)
             {
-                updateWindow.DialogResult = true;
-                updateWindow.Close();
+                CurrentAssignment.Description = UpdateDescription;
+                CurrentAssignment.PickUpTime = CombinedPickUpDateTime;
+                CurrentAssignment.DropOffTime = CombinedDropOffDateTime;
+                CurrentAssignment.FromAddress = UpdateFromAddress;
+                CurrentAssignment.ToAddress = UpdateToAddress;
+
+                CurrentAssignment.Description2 = UpdateDescription2;
+                CurrentAssignment.PickUpTime2 = CombinedPickUpDateTime2;
+                CurrentAssignment.DropOffTime2 = CombinedDropOffDateTime2;
+                CurrentAssignment.FromAddress2 = UpdateFromAddress2;
+                CurrentAssignment.ToAddress2 = UpdateToAddress2;
+
+                if (parameter is UpdateWindow updateWindow)
+                {
+                    updateWindow.DialogResult = true;
+                    updateWindow.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Indtast venligst gyldige afhentnings- og afleveringstider, før du tilføjer en opgave.",
+                      "Ugyldige tider",
+                      MessageBoxButton.OK,
+                     MessageBoxImage.Warning);
             }
         }
 

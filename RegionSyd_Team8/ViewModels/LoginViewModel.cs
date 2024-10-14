@@ -27,7 +27,7 @@ namespace RegionSyd_Team8.ViewModels
         public LoginViewModel()
         {
             _userRepository = new UserRepository();
-            
+
             ErrorVisibility = Visibility.Collapsed;
             //LoginCommand = new RelayCommand(param => Login());
         }
@@ -102,4 +102,4 @@ namespace RegionSyd_Team8.ViewModels
             }
         }
     }
-} 
+}
