@@ -1,0 +1,59 @@
+CREATE TABLE ASSIGMENTS(
+AssignmentID int PRIMARY KEY,
+AssignmentDescription NVarChar(200),
+PickUpTime DateTime2, 
+DropOffTime DateTime2,
+StartLocation1 NVarChar(50),
+EndLocation1 NVarChar(50), 
+StartLocation2 NVarChar(50),
+EndLocation2 NVarChar(50),
+StatusCombination bit,
+StatusFinish bit,
+CPRNumber NVarCHar(20),
+AmbulanceID int,
+CONSTRAINT FK_PATIENT FOREIGN KEY (CPRNumber) REFERENCES PATIENT(CPRNumber),
+CONSTRAINT FK_AMBULANCE FOREIGN KEY (AmbulanceID) REFERENCES AMBULANCE(AmbulanceID));
+
+CREATE TABLE AMBULANCE(
+AmbulanceID int IDENTITY(1,1) PRIMARY KEY,
+DeploymentStatus bit,
+LocationStatus float,
+RegionName NVarChar(50) Not Null FOREIGN KEY REFERENCES REGION(RegionName));
+ 
+CREATE TABLE PATIENT(
+CPRNumber NVarChar(20) PRIMARY KEY,
+FullName NVarChar(50),
+PatientAddress NVarChar(50),
+PhoneNumber NVarChar(20),
+Region NVarChar(50));
+ 
+ 
+ CREATE TABLE LOCATION(
+ LocationID int PRIMARY KEY,
+ Address NVarChar(200),
+ City NVarChar(100),
+ ZipCode NVarChar(5));
+
+INSERT INTO REGION
+VALUES ('Sjælland'),
+(Syddanmark),
+('Hovedstaden'),
+('Midtjylland'), 
+('Nordjylland');
+
+INSERT INTO AMBULANCE
+VALUES (1, 1, 'Syddanmark),
+(1, 0, 'Sjælland'),
+(0, 1, 'Syddanmark');
+
+INSERT INTO PATIENT
+VALUES ('2807859765', 'Andreas Varre', '86462061', 'Hovedstaden'),
+('0312078272', 'Sofia Darcy', '24578391', 'Sjælland'),
+('2108917458', 'Amalie Szigethy', '33728194', 'Sjælland')
+;
+
+INSERT INTO ASSIGMENTS 
+VALUES (2, 'Kørsel', '2024-11-10 11:35:00', '2024-11-10 14:00:00', 'Bregnevej 15', 'Rigshospitalet', 'Skolevej 82', 'Køge Hospital', 1, 0, '2807859765', 3),
+(3, 'Kørsel', '2024-11-10 13:34:00', '2024-11-10 15:00:00', 'Kamillevej 21', 'Rigshospitalet', 'St. Peters Allé 23', 'Aarhus Hospital', 1, 0, '0312078272', 3),
+(4, 'Kørsel', '2024-11-09 11:35:00', '2024-11-09 14:00:00', 'Kaspargade 78', 'Køge Sygehus', 'Louisastræde 69', 'Køge Hospital', 1, 0, '2108917458', 3)
+;
